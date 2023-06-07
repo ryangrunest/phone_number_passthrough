@@ -34,9 +34,12 @@ export default {
     const params = new URLSearchParams(window.location.search);
     if (params.has('phone_number')) {
       let number = params.get('phone_number') ?? "";
-      number = number?.substring(2)
+      while (number.length > 10) {
+        number = number.slice(1)
+      }
       number = addDashes(number);
       window.location.href = `https://ww1.autotask.net/Autotask/AutoTaskExtend/ExecuteCommand.aspx?Code=OpenAccount&Phone=${number}`;
+      console.log(number);
     }
   }
 }
