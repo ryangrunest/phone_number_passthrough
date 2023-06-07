@@ -23,23 +23,28 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <script lang="ts">
 
-const addDashes = (f: string) => {
-  const f_val = f.replace(/\D[^\.]/g, "");
-
-  return f_val.slice(0, 3) + "-" + f_val.slice(3, 6) + "-" + f_val.slice(6);
+const addDashes: Function = (f: string): string => {
+  return f.slice(0, 3) + "-" + f.slice(3, 6) + "-" + f.slice(6);
 };
 
 export default {
-  mounted() {
-    const params = new URLSearchParams(window.location.search);
+  mounted(): void {
+    const params: URLSearchParams = new URLSearchParams(window.location.search);
+
     if (params.has('phone_number')) {
-      let number = params.get('phone_number') ?? "";
-      while (number.length > 10) {
-        number = number.slice(1)
+      const phoneNumberParam: string = params.get('phone_number') ?? "";
+      const number = parseInt(phoneNumberParam);
+      let convertedNumber = number.toString();
+
+      while (convertedNumber.length > 10) {
+        convertedNumber = convertedNumber.slice(1)
       }
-      number = addDashes(number);
+
+      convertedNumber = addDashes(convertedNumber);
+
+      console.log(convertedNumber);
       window.location.href = `https://ww1.autotask.net/Autotask/AutoTaskExtend/ExecuteCommand.aspx?Code=OpenAccount&Phone=${number}`;
-      console.log(number);
+
     }
   }
 }
