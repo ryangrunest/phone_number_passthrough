@@ -35,7 +35,8 @@ export default {
     if (params.has('phone_number')) {
       let number = params.get('phone_number') ?? "";
       number = number?.substring(2)
-      console.log(addDashes(number));
+      number = addDashes(number);
+      window.location.href = `https://ww1.autotask.net/Autotask/AutoTaskExtend/ExecuteCommand.aspx?Code=OpenAccount&Phone=${number}`;
     }
   }
 }
