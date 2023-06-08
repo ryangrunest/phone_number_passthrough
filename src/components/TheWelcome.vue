@@ -9,6 +9,11 @@ const store = useNumberStore();
     <template #heading>Phone Number</template>
 
     The phone number passed was {{ store.phoneNumber }}.
-    Redirecting to <a :href="store.href">AutoTask.</a>
+    <template v-if="store.href.length < 1">
+      Unable to redirect.
+    </template>
+    <template v-else>
+      Redirecting to <a :href="store.href">AutoTask.</a>
+    </template>
   </WelcomeItem>
 </template>
